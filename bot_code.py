@@ -5,22 +5,22 @@ from telegram.ext import Application, CommandHandler, CallbackContext
 async def start(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
     
-    # Первое сообщение - просто текст
+    # First message 
     first_message = "Welcome to the COSMOS STARSHIP event!"
     await context.bot.send_message(chat_id=chat_id, text=first_message)
 
-    # Кнопка Claim AirDrop
+    # button Claim AirDrop
     claim_airdrop_button = InlineKeyboardButton("GO TO SPACE", web_app=WebAppInfo(url='https://ni77ua.github.io/n1telegbots/'))
     claim_airdrop_markup = InlineKeyboardMarkup([[claim_airdrop_button]])
 
-    # Второе сообщение - текст с ссылками и изображением
+    # Second message - text + link
     second_message = (
         "Learn more about our project:\n"
         "[Official site](https://anon.tg/)\n"
         
     )
 
-    # Создание кнопок для второго сообщения
+    # Buttons to DEX's
     dedust_button = InlineKeyboardButton("DeDust.io", url='https://dedust.io/swap/TON/ANON')
     stonfi_button = InlineKeyboardButton("STON.Fi", url='https://app.ston.fi/swap?chartVisible=false&ft=TON&tt=ANON')
     second_message_markup = InlineKeyboardMarkup([[dedust_button, stonfi_button]])
@@ -29,7 +29,7 @@ async def start(update: Update, context: CallbackContext):
 
 
 
-    # Четвертое сообщение - текст с кнопками и GIF
+    # text and buttons with link
     caption = """Coin our exciting event - the Anon Box Airdrop! 
 What's inside Anon Box?
 - Valuable NFTs from our partners
@@ -44,7 +44,7 @@ Benefits:
 
 Stay anonymous and get ready for new surprises with ANON!"""
 
-    # Создание кнопок
+    # buttons
     keyboard = [
         [InlineKeyboardButton("Official site", url='https://ni77ua.github.io/n1telegbots/')],
         [InlineKeyboardButton("PLAY", web_app=WebAppInfo(url='https://ni77ua.github.io/n1telegbots/'))],
@@ -53,10 +53,10 @@ Stay anonymous and get ready for new surprises with ANON!"""
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    # Отправка GIF с описанием и кнопками
+    # GIF
     await context.bot.send_animation(chat_id=chat_id, animation='https://i.postimg.cc/DzVL3Vk0/ezgif-6-9954069cb7.gif', caption=caption, reply_markup=reply_markup)
 
-# Вставьте ваш токен
+# token
 application = Application.builder().token("7220018530:AAGgWgbKZYlMiH_CsYXXiVp8gH_W-HfRmCw").build()
 application.add_handler(CommandHandler("start", start))
 application.run_polling()
